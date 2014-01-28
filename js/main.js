@@ -1,4 +1,19 @@
+/*!
+ * main.js for Library app built using Backbone
+ * http://arvindr21.github.io/BackbonejsLibraryapp/
+ *
+ * Date: 2014, Jan.
+ */
+ 
+ /*
+ *	Self Executing anonymous passing in jQuery
+ */
 (function ($) {
+
+/*
+*	Storing an Array of books for the library app. In this example we will not interact with the server
+*	to fetch data.	
+*/
     var books = [{title:"JS the good parts", author:"John Doe", releaseDate:"2012", keywords:"JavaScript Programming"},
         {title:"CS the better parts", author:"John Doe", releaseDate:"2012", keywords:"CoffeeScript Programming"},
         {title:"Scala for the impatient", author:"John Doe", releaseDate:"2012", keywords:"Scala Programming"},
