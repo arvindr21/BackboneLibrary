@@ -51,19 +51,21 @@
         tagName:"div", 
         className:"bookContainer",
 /*
-*		If you did see the markup, we have a script tag which consists of the skeleton/template for the Book View. This is extracted and cached here.
+*		If you did see the markup, we have a script tag which consists of the 
+*		skeleton/template for the Book View. This is extracted and cached here.
 */
         template:$("#bookTemplate").html(),
         render:function () {
 /*
 *		Using underscore and converting the html to a template.
 */
-            var tmpl = _.template(this.template); //tmpl is a function that takes a JSON and returns html
+            var tmpl = _.template(this.template); 
 /*
-*		Pass the model to the Template, and the template will populate the markup based on the model. (neat ha..)
+*		Pass the model to the Template, and the template will populate 
+* 		the markup based on the model. (neat ha..)
 */
-            this.$el.html(tmpl(this.model.toJSON())); //this.el is what we defined in tagName. use $el to get access to jQuery html() function
-            return this; // Chaining things
+            this.$el.html(tmpl(this.model.toJSON())); 
+            return this; 
         }
     });
 
