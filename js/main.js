@@ -1,4 +1,19 @@
+/*!
+ * main.js for Library app built using Backbone
+ * http://arvindr21.github.io/BackbonejsLibraryapp/
+ *
+ * Date: 2014, Jan.
+ */
+ 
+ /*
+ *	Self Executing anonymous passing in jQuery
+ */
 (function ($) {
+
+/*
+*	Storing an Array of books for the library app. In this example we will not interact with the server
+*	to fetch data.	
+*/
     var books = [{title:"JS the good parts", author:"John Doe", releaseDate:"2012", keywords:"JavaScript Programming"},
         {title:"CS the better parts", author:"John Doe", releaseDate:"2012", keywords:"CoffeeScript Programming"},
         {title:"Scala for the impatient", author:"John Doe", releaseDate:"2012", keywords:"Scala Programming"},
@@ -47,14 +62,20 @@
             this.$el.append(bookView.render().el);
         }
     });
+    
+    
+    var LibraryRouter = Backbone.Router.extend({
+        routes: {
+            '': 'showLibrary',
+            'View/:id': 'view' // #View/1
+        },
 
-	if(location.href.split("type=").length > 1 && location.href.split("type=")[1] == "many")
-	{
-    	var libraryView = new LibraryView();
-	}
-	else if(location.href.split("type=").length > 1 && location.href.split("type=")[1] == "one")
-	{	
-		var book = new Book({
+        showLibrary: function (id) {
+            var libraryView = new LibraryView();
+        },
+
+        view: function (id) {
+           var book = new Book({
         	title:"Some title",
 			author:"John Doe",
         	releaseDate:"2012",
@@ -66,11 +87,13 @@
     	});
 
     	$("#books").html(bookView.render().el);
-	}
-	else
-	{
-		var libraryView = new LibraryView();
-	}
+        }
+    });
+    
+    var appRouter = new LibraryRouter();
+    Backbone.history.start();
+
+
     
     
 })(jQuery);
