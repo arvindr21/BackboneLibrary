@@ -62,14 +62,20 @@
             this.$el.append(bookView.render().el);
         }
     });
+    
+    
+    var LibraryRouter = Backbone.Router.extend({
+        routes: {
+            '': 'showLibrary',
+            'View/:id': 'view' // #View/1
+        },
 
-	if(location.href.split("type=").length > 1 && location.href.split("type=")[1] == "many")
-	{
-    	var libraryView = new LibraryView();
-	}
-	else if(location.href.split("type=").length > 1 && location.href.split("type=")[1] == "one")
-	{	
-		var book = new Book({
+        showLibrary: function (id) {
+            var libraryView = new LibraryView();
+        },
+
+        view: function (id) {
+           var book = new Book({
         	title:"Some title",
 			author:"John Doe",
         	releaseDate:"2012",
@@ -81,11 +87,13 @@
     	});
 
     	$("#books").html(bookView.render().el);
-	}
-	else
-	{
-		var libraryView = new LibraryView();
-	}
+        }
+    });
+    
+    var appRouter = new LibraryRouter();
+    Backbone.history.start();
+
+
     
     
 })(jQuery);
