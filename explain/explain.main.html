@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Backbonejs Library App - Main.js Explanation</title>
+	
+	<link rel="stylesheet" type="text/css" href="unsemantic.css" />
+	<link rel="stylesheet" type="text/css" href="explain.css" />
+	<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+	
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+	
+  </head>
+  <body>
+	<div class="page-menu">
+		<div class="grid-container">
+			<div class="grid-60 mobile-grid-100">
+			    <a class="src-title" href="https://raw.github.com/arvindr21/BackbonejsLibraryapp/gh-pages/js/main.js">main.js</a>
+			</div>
+			
+		</div>
+	</div>
+
+	
+		<div class='sections grid-container'>
+	        <div class='code-bg hide-on-mobile'></div>
+		    <br /><br />		
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>main.js for Library app built using Backbone</p> <p>http://arvindr21.github.io/BackbonejsLibraryapp/</p> <p>Date: 2014, Jan.</p></div>
+					  <div class='code grid-60 mobile-grid-100 empty'><pre></pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>Self Executing anonymous passing in jQuery</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>(function ($) {
+</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>Storing an Array of books for the library app. In this example we will not interact with the server   to fetch data.</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>    var books = [{title:&quot;JS the good parts&quot;, author:&quot;John Doe&quot;, releaseDate:&quot;2012&quot;, keywords:&quot;JavaScript Programming&quot;},
+        {title:&quot;CS the better parts&quot;, author:&quot;John Doe&quot;, releaseDate:&quot;2012&quot;, keywords:&quot;CoffeeScript Programming&quot;},
+        {title:&quot;Scala for the impatient&quot;, author:&quot;John Doe&quot;, releaseDate:&quot;2012&quot;, keywords:&quot;Scala Programming&quot;},
+        {title:&quot;American Psyco&quot;, author:&quot;John Doe&quot;, releaseDate:&quot;2012&quot;, keywords:&quot;Novel Slasher&quot;},
+        {title:&quot;Eloquent JavaScript&quot;, author:&quot;John Doe&quot;, releaseDate:&quot;2012&quot;, keywords:&quot;JavaScript Programming&quot;}];
+</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>Init the model. A Book. Lets set a default for the cover image. You know, just in case.</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>    var Book = Backbone.Model.extend({
+        defaults:{
+            coverImage:&quot;http://placehold.it/99x99&quot;
+        }
+    });
+</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>Define the collection. The primary argument will be the type of Collection. i.e. A book, Which makes this collection a library entity.</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>    var Library = Backbone.Collection.extend({
+        model:Book
+    });
+</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>Reusable Book view. We Define a book view consisting of the following items   <br/>1. A tagName - The holder, can be anything/Div is default   <br/>2. A className - Optional   <br/>3. Template - To render the UI from   <br/>4. render() - The magic logic.</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>    var BookView = Backbone.View.extend({
+        tagName:&quot;div&quot;,
+        className:&quot;bookContainer&quot;,</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><pre><code>If you did see the markup, we have a script tag <br/>which consists of the skeleton/template for the <br/>Book View. This is extracted and cached here. </code></pre></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>        template:$(&quot;#bookTemplate&quot;).html(),
+        render:function () {</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><pre><code>Using underscore and converting the html to <br/>a template. </code></pre></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>            var tmpl = _.template(this.template);</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><pre><code>this.el is what we defined in tagName. use $el <br/>to get access to jQuery html() function <br/>Pass the model to the Template, and the template <br/>will populate the markup based on the model. <br/>(neat ha..) </code></pre></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>            this.$el.html(tmpl(this.model.toJSON())); 
+            return this; // Chaining things
+        }
+    });
+</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>Library view uses pieces of Book view to build itself.</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>    var LibraryView = Backbone.View.extend({
+        el:$(&quot;#books&quot;),</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>Init method, get the books collections &amp; trigger the render method.</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>        initialize:function(){
+            this.collection = new Library(books);
+            this.render();
+        },</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>Using underscore&#39;s each method, we iterate through all the books. Then call a method to render each item to the UI.</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>        render: function(){
+            var that = this;
+            _.each(this.collection.models, function(item){
+                that.renderBook(item);
+            });
+        },
+</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>renderBook, internally calls the Book View and passes a model to it. This will spit out the view for each book, which gets appended to the Library View.</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>        renderBook:function(item){
+            var bookView = new BookView({
+                model: item
+            });
+            this.$el.append(bookView.render().el);
+        }
+    });
+</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>The Controller/Router - Lets define some routes, one to view all the books in library and one to view a selected book.</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>    var LibraryRouter = Backbone.Router.extend({</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>ex url: &lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;/&lt;path&gt;&amp;&lt;parameters&gt;?&lt;query&gt;#&lt;fragment&gt;   &#39;&#39; <br/> If nothing is present as part of the fragment/Query, we show the complete library   &#39;View/:id&#39; : Match any route that has a &#39;View&#39; as part of the fragment and anything after that as ID</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>        routes: {
+            '': 'showLibrary',
+            'View/:id': 'view' // #View/1
+        },
+
+        showLibrary: function (id) {</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><pre><code>Call the library view </code></pre></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>            var libraryView = new LibraryView();
+        },
+
+        view: function (id) {</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+			
+				  <div class='section'>
+					  <div class='comment grid-40 mobile-grid-100 not-empty'><p>Call the individual book view</p></div>
+					  <div class='code grid-60 mobile-grid-100 not-empty'><pre>           var book = new Book({
+         			 title:&quot;Some title&quot;,
+      				author:&quot;John Doe&quot;,
+          			releaseDate:&quot;2012&quot;,
+          keywords:&quot;JavaScript Programming&quot;
+        });
+
+      bookView = new BookView({
+          model: book
+      });
+
+      $(&quot;#books&quot;).html(bookView.render().el);
+        }
+    });
+
+    var appRouter = new LibraryRouter();
+    Backbone.history.start();
+
+
+
+
+})(jQuery);</pre></div>
+				  </div>			
+				  <div class='clear'></div>			
+					
+		</div>
+	
+	
+
+	
+  </body>
+</html>
